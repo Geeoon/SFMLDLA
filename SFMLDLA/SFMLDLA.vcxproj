@@ -144,7 +144,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\classes\Scene.cpp" />
+    <ClCompile Include="src\classes\Particle.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\classes\UIManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\classes\Scene.h" />
+    <ClInclude Include="src\classes\Particle.h" />
+    <ClInclude Include="src\classes\UIManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

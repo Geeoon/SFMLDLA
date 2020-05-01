@@ -1,5 +1,7 @@
-#include <iostream>
+#include "classes/Scene.h"
 
 int main() {
-	std::cout << "Hello World" << std::endl;
+	Scene test;
+	test.start();
+	return 0;
 }
