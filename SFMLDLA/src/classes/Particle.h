@@ -1,18 +1,22 @@
 #pragma once
 #include <cstdlib>
+#include <stdlib.h> 
 #include <ctime>
+#include <vector>
 #include "SFML/Graphics.hpp"
 
 class Particle
 {
 public:
 	Particle(int x, int y, bool seed);
-	void update(sf::RenderWindow& window);
+	void update(sf::RenderWindow& window, std::vector<Particle>& particles);
 	void setIsStatic(bool s);
 	bool getIsStatic();
 	void setSeed(double seed);
 	void randomLocation();
 	void setLocation(int x, int y);
+	int getX();
+	int getY();
 private:
 	void walk();
 	void draw(sf::RenderWindow& window);

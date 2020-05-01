@@ -16,11 +16,19 @@ Particle::Particle(int x, int y, bool seed) {
 	point.setPosition((float)x, (float)y);
 }
 
-void Particle::update(sf::RenderWindow& window) {
+void Particle::update(sf::RenderWindow& window, std::vector<Particle>& particles) {
 	if (!isStatic) {
 		walk();
 	} else {
-
+		for (int i = 0; i < particles.size(); i++) {
+			if (&particles[i] != this) {
+				if (particles[i].getIsStatic() == false) {
+					if (abs(particles[i].getX() - xPosition) <= 1 && abs(particles[i].getY() - yPosition) <= 1) {
+						particles[i].setIsStatic(true);
+					}
+				}
+			}
+		}
 	}
 	point.setPosition((float)xPosition, (float)yPosition);
 	draw(window);
@@ -90,4 +98,12 @@ void Particle::randomLocation() {
 void Particle::setLocation(int x, int y) {
 	xPosition = x;
 	yPosition = y;
+}
+
+int Particle::getX() {
+	return xPosition;
+}
+
+int Particle::getY() {
+	return yPosition;
 }

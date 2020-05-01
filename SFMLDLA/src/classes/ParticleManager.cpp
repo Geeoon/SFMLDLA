@@ -11,6 +11,6 @@ ParticleManager::ParticleManager(int size) {
 
 void ParticleManager::update(sf::RenderWindow& window) {
 	for (size_t i = 0; i < particles.size(); i++) {
-		particles[i].update(window);
+		particles[i].update(window, particles);
 	}
 }
