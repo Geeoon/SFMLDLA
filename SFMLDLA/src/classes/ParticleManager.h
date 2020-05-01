@@ -5,7 +5,7 @@
 class ParticleManager
 {
 public:
-	ParticleManager(int size);
+	ParticleManager(int size, sf::RenderWindow& window);
 	void update(sf::RenderWindow& window);
 
 private:

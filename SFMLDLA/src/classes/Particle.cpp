@@ -1,7 +1,8 @@
 #include "Particle.h"
 
-Particle::Particle(int x, int y, bool seed) {
+Particle::Particle(int x, int y, bool seed, int r) {
 	arrivalTime = 0;
+	radius = r;
 	srand(time(NULL));
 	isStatic = seed;
 	if (seed == true) {
@@ -9,21 +10,20 @@ Particle::Particle(int x, int y, bool seed) {
 		yPosition = y;
 		point.setFillColor(sf::Color::Green);
 	} else {
-		randomLocation();
 		point.setFillColor(sf::Color::White);
 	}
-	point.setSize(sf::Vector2f(1, 1));
+	point.setSize(sf::Vector2f(radius, radius));
 	point.setPosition((float)x, (float)y);
 }
 
 void Particle::update(sf::RenderWindow& window, std::vector<Particle>& particles) {
 	if (!isStatic) {
-		walk();
+		walk(window);
 	} else {
 		for (int i = 0; i < particles.size(); i++) {
 			if (&particles[i] != this) {
 				if (particles[i].getIsStatic() == false) {
-					if (abs(particles[i].getX() - xPosition) <= 1 && abs(particles[i].getY() - yPosition) <= 1) {
+					if (abs(particles[i].getX() - xPosition) <= radius && abs(particles[i].getY() - yPosition) <= radius) {
 						particles[i].setIsStatic(true);
 					}
 				}
@@ -34,7 +34,7 @@ void Particle::update(sf::RenderWindow& window, std::vector<Particle>& particles
 	draw(window);
 }
 
-void Particle::walk() {
+void Particle::walk(sf::RenderWindow& window) {
 	if (!isStatic) {
 		switch (1 + rand() % 6) {
 		case 1:
@@ -55,17 +55,20 @@ void Particle::walk() {
 	}
 
 	//Prevents particles from going out of bounds.
-	if (xPosition > 600) {
-		xPosition = 600;
-	} else if (xPosition < 0) {
+
+	if (xPosition < 0) {
 		xPosition = 0;
+	} else if (xPosition > window.getSize().x) {
+		xPosition = window.getSize().x;
+	}
+	
+	if (yPosition < 0) {
+		yPosition = 0;
+	} else if (yPosition > window.getSize().y) {
+		yPosition = window.getSize().y;
 	}
 
-	if (yPosition > 600) {
-		yPosition = 600;
-	} else if (yPosition < 0) {
-		yPosition = 0;
-	}
+
 	
 }
 
@@ -89,12 +92,6 @@ bool Particle::getIsStatic() {
 void Particle::setSeed(double seed) {
 	srand(seed);
 }
-
-void Particle::randomLocation() {
-	xPosition = rand() % 600;
-	yPosition = rand() % 600;
-}
-
 void Particle::setLocation(int x, int y) {
 	xPosition = x;
 	yPosition = y;
@@ -106,4 +103,8 @@ int Particle::getX() {
 
 int Particle::getY() {
 	return yPosition;
+}
+
+sf::RectangleShape Particle::getRectangle() {
+	return point;
 }
