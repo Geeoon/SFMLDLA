@@ -2,15 +2,14 @@
 
 Particle::Particle(int x, int y, bool seed) {
 	arrivalTime = 0;
-	srand(time(0));
+	srand(time(NULL));
 	isStatic = seed;
 	if (seed == true) {
 		xPosition = x;
 		yPosition = y;
 		point.setFillColor(sf::Color::Green);
 	} else {
-		xPosition = std::rand() % 600;
-		yPosition = std::rand() % 600;
+		randomLocation();
 		point.setFillColor(sf::Color::White);
 	}
 	point.setSize(sf::Vector2f(1, 1));
@@ -29,7 +28,7 @@ void Particle::update(sf::RenderWindow& window) {
 
 void Particle::walk() {
 	if (!isStatic) {
-		switch (1 + std::rand() % 6) {
+		switch (1 + rand() % 6) {
 		case 1:
 			xPosition += 1;
 			break;
@@ -68,8 +67,27 @@ void Particle::draw(sf::RenderWindow& window) {
 
 void Particle::setIsStatic(bool s) {
 	isStatic = s;
+	if (isStatic == true) {
+		point.setFillColor(sf::Color::Green);
+	} else {
+		point.setFillColor(sf::Color::White);
+	}
 }
 
 bool Particle::getIsStatic() {
 	return isStatic;
+}
+
+void Particle::setSeed(double seed) {
+	srand(seed);
+}
+
+void Particle::randomLocation() {
+	xPosition = rand() % 600;
+	yPosition = rand() % 600;
+}
+
+void Particle::setLocation(int x, int y) {
+	xPosition = x;
+	yPosition = y;
 }

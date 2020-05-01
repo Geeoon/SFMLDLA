@@ -10,6 +10,9 @@ public:
 	void update(sf::RenderWindow& window);
 	void setIsStatic(bool s);
 	bool getIsStatic();
+	void setSeed(double seed);
+	void randomLocation();
+	void setLocation(int x, int y);
 private:
 	void walk();
 	void draw(sf::RenderWindow& window);
