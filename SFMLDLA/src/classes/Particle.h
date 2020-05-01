@@ -1,14 +1,15 @@
 #pragma once
 #include <cstdlib>
-#include <iostream> //For debug only; delete later
+#include <ctime>
 #include "SFML/Graphics.hpp"
 
 class Particle
 {
 public:
-	Particle(int x, int y);
+	Particle(int x, int y, bool seed);
 	void update(sf::RenderWindow& window);
-
+	void setIsStatic(bool s);
+	bool getIsStatic();
 private:
 	void walk();
 	void draw(sf::RenderWindow& window);
@@ -16,5 +17,6 @@ private:
 	int xPosition;
 	int yPosition;
 	double arrivalTime;
+	bool isStatic = false;
 };
 

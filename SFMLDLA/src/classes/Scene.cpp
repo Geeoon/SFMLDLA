@@ -1,16 +1,15 @@
 #include "Scene.h"
 
 Scene::Scene() {
-
+	particles.reset(new ParticleManager(10000));
 }
 
 void Scene::start() {
-	Particle test(0, 0);
 	while (ui.getWindow().isOpen()) {
 		ui.pollEvent();
 		ui.getWindow().clear();
 
-		test.update(ui.getWindow());
+		particles->update(ui.getWindow());
 
 		ui.getWindow().display();
 	}

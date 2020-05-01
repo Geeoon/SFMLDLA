@@ -1,5 +1,5 @@
 #pragma once
-#include "Particle.h"
+#include "ParticleManager.h"
 #include "UIManager.h"
 class Scene
 {
@@ -8,5 +8,6 @@ public:
 	void start();
 private:
 	UIManager ui;
+	std::unique_ptr<ParticleManager> particles;
 };
 
