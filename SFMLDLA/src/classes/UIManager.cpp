@@ -1,7 +1,7 @@
 #include "UIManager.h"
 
 UIManager::UIManager() {
-	window.create(sf::VideoMode(600, 600), "Diffusion-Limited Aggregation");
+	window.create(sf::VideoMode(200, 200), "Diffusion-Limited Aggregation", sf::Style::Close);
 }
 
 void UIManager::pollEvent() {

@@ -8,16 +8,17 @@
 class Particle
 {
 public:
-	Particle(int x, int y, bool seed, int r);
-	void update(sf::RenderWindow& window, std::vector<Particle>& particles);
+	Particle(int x, int y, bool seed, int r, std::vector<std::vector<int>>& board);
+	void update(sf::RenderWindow& window, std::vector<Particle>& particles, std::vector<std::vector<int>>& board);
 	void setIsStatic(bool s);
 	bool getIsStatic();
 	void setSeed(double seed);
 	void randomLocation();
-	void setLocation(int x, int y);
+	void setLocation(int x, int y, std::vector<std::vector<int>>& board);
 	int getX();
 	int getY();
 	sf::RectangleShape getRectangle();
+	void updateBoard(std::vector<std::vector<int>>& board);
 private:
 	void walk(sf::RenderWindow& window);
 	void draw(sf::RenderWindow& window);
