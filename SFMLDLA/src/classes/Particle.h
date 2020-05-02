@@ -24,6 +24,7 @@ private:
 	int xPosition;
 	int yPosition;
 	double arrivalTime;
+	double startTime;
 	bool isStatic = false;
 	int radius;
 };

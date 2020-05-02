@@ -1,7 +1,7 @@
 #include "Scene.h"
 
 Scene::Scene() {
-	particles.reset(new ParticleManager(10000, ui.getWindow()));
+	particles.reset(new ParticleManager(40000, ui.getWindow()));
 }
 
 void Scene::start() {

@@ -4,6 +4,7 @@ Particle::Particle(int x, int y, bool seed, int r, std::vector<std::vector<int>>
 	xPosition = 0;
 	yPosition = 0;
 	arrivalTime = 0;
+	startTime = time(nullptr);
 	radius = r;
 	srand(time(NULL));
 	isStatic = seed;
@@ -11,7 +12,7 @@ Particle::Particle(int x, int y, bool seed, int r, std::vector<std::vector<int>>
 		xPosition = x;
 		yPosition = y;
 		board[xPosition][yPosition] = 2;
-		point.setFillColor(sf::Color::White);
+		point.setFillColor(sf::Color(0, 0, 150));
 	} else {
 		point.setFillColor(sf::Color::White);
 	}
@@ -21,51 +22,51 @@ Particle::Particle(int x, int y, bool seed, int r, std::vector<std::vector<int>>
 
 void Particle::update(sf::RenderWindow& window, std::vector<Particle>& particles, std::vector<std::vector<int>>& board) {
 	board[xPosition][yPosition] = 0;
-	if (!isStatic) {;
+	if (!isStatic) {
 		walk(window);
 
 		board[xPosition][yPosition] = 1;
 		if (xPosition == 0) { //left
 			if (yPosition == 0) {//topleft
 				if (board[xPosition][yPosition + 1] == 2 || board[xPosition + 1][yPosition] == 2) {
-					isStatic = true;
+					setIsStatic(true);
 				}
 			} else if (yPosition == window.getSize().x - 1) {//bottomleft
 				if (board[xPosition][yPosition - 1] == 2 || board[xPosition + 1][yPosition] == 2) {
-					isStatic = true;
+					setIsStatic(true);
 				}
 			} else {//middleleft
 				if (board[xPosition][yPosition + 1] == 2 || board[xPosition][yPosition - 1] == 2 || board[xPosition + 1][yPosition] == 2) {
-					isStatic = true;
+					setIsStatic(true);
 				}
 			}
 		} else if (xPosition == window.getSize().x - 1) {//right
 			if (yPosition == 0) {//topright
 				if (board[xPosition][yPosition + 1] == 2 || board[xPosition - 1][yPosition] == 2) {
-					isStatic = true;
+					setIsStatic(true);
 				}
 			} else if (yPosition == window.getSize().x - 1) {//bottomlright
 				if (board[xPosition][yPosition - 1] == 2 || board[xPosition - 1][yPosition] == 2) {
-					isStatic = true;
+					setIsStatic(true);
 				}
 			} else {//middleright
 				if (board[xPosition][yPosition + 1] == 2 || board[xPosition][yPosition - 1] == 2 || board[xPosition - 1][yPosition] == 2) {
-					isStatic = true;
+					setIsStatic(true);
 				}
 			}
 		} else {//middle
 			if (yPosition == 0) {//top middle
 				if (board[xPosition][yPosition + 1] == 2 || board[xPosition + 1][yPosition] == 2 || board[xPosition - 1][yPosition] == 2) {
-					isStatic = true;
+					setIsStatic(true);
 				}
 			} else if (yPosition == window.getSize().x - 1) {//bottom middle
 				if (board[xPosition][yPosition - 1] == 2 || board[xPosition + 1][yPosition] == 2 || board[xPosition - 1][yPosition] == 2) {
-					isStatic = true;
+					setIsStatic(true);
 				}
 			} else {//middle middle
 
 				if (board[xPosition][yPosition + 1] == 2 || board[xPosition][yPosition - 1] == 2 || board[xPosition + 1][yPosition] == 2 || board[xPosition - 1][yPosition] == 2) {
-					isStatic = true;
+					setIsStatic(true);
 				}
 			}
 		}
@@ -121,7 +122,10 @@ void Particle::draw(sf::RenderWindow& window) {
 void Particle::setIsStatic(bool s) {
 	isStatic = s;
 	if (isStatic == true) {
-		point.setFillColor(sf::Color::White);
+		arrivalTime = time(nullptr);
+		double timeDif = (arrivalTime - startTime);
+		sf::Color color((std::sin(timeDif / 255) + 1) * (255 / 2), 0, 150);
+		point.setFillColor(color);
 	} else {
 		point.setFillColor(sf::Color::Black);
 	}
