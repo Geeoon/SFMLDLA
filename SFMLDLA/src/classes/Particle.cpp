@@ -72,7 +72,7 @@ void Particle::update(sf::RenderWindow& window, std::vector<Particle>& particles
 		}
 	} else {
 		board[xPosition][yPosition] = 2;
-		draw(window);
+		window.draw(point);
 	}
 	point.setPosition((float)xPosition, (float)yPosition);
 }
