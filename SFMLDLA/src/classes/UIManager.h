@@ -4,7 +4,7 @@ class UIManager
 {
 public:
 	UIManager();
-	void pollEvent();
+	void pollEvent(std::vector<std::vector<int>>& board);
 	sf::RenderWindow& getWindow();
 private:
 	sf::RenderWindow window;

@@ -15,3 +15,7 @@ void ParticleManager::update(sf::RenderWindow& window) {
 		particles[i].update(window, particles, board);
 	}
 }
+
+std::vector<std::vector<int>>& ParticleManager::getBoard(){
+	return board;
+}

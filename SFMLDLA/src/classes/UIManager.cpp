@@ -1,15 +1,16 @@
 #include "UIManager.h"
 
 UIManager::UIManager() {
-	window.create(sf::VideoMode(200, 200), "Diffusion-Limited Aggregation", sf::Style::Close);
+	window.create(sf::VideoMode(400, 400), "Diffusion-Limited Aggregation", sf::Style::Close);
 }
 
-void UIManager::pollEvent() {
+void UIManager::pollEvent(std::vector<std::vector<int>>& board) {
 	sf::Event event;
 	while (window.pollEvent(event)) { 
 		if (event.type == sf::Event::Resized) {
 			sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
 			window.setView(sf::View(visibleArea));
+			board.resize(window.getSize().x, std::vector<int>(window.getSize().y));
 		}
 
 		if (event.type == sf::Event::Closed) {
