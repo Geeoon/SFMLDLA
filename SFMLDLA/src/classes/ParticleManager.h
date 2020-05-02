@@ -11,6 +11,6 @@ public:
 private:
 	std::vector<Particle> particles;
 	std::vector<std::vector<int>> board;
-	int radius = 3;
+	int radius = 1;
 };
 

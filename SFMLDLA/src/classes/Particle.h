@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdlib>
 #include <stdlib.h> 
+#include <iostream>
 #include <ctime>
 #include <vector>
 #include "SFML/Graphics.hpp"
@@ -13,12 +14,10 @@ public:
 	void setIsStatic(bool s);
 	bool getIsStatic();
 	void setSeed(double seed);
-	void randomLocation();
 	void setLocation(int x, int y, std::vector<std::vector<int>>& board);
 	int getX();
 	int getY();
 	sf::RectangleShape getRectangle();
-	void updateBoard(std::vector<std::vector<int>>& board);
 private:
 	void walk(sf::RenderWindow& window);
 	void draw(sf::RenderWindow& window);

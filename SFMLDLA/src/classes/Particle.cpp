@@ -23,20 +23,97 @@ void Particle::update(sf::RenderWindow& window, std::vector<Particle>& particles
 	board[xPosition][yPosition] = 0;
 	if (!isStatic) {;
 		walk(window);
+
 		board[xPosition][yPosition] = 1;
-		if (board[xPosition][yPosition + 1] == 2) {
-			isStatic = true;
+		if (xPosition == 0) { //left
+			if (yPosition == 0) {//topleft
+				if (board[xPosition][yPosition + 1] == 2) {
+					isStatic = true;
+				}
+				if (board[xPosition + 1][yPosition] == 2) {
+					isStatic = true;
+				}
+			} else if (yPosition == window.getSize().x - 1) {//bottomleft
+				if (board[xPosition][yPosition - 1] == 2) {
+					isStatic = true;
+				}
+				if (board[xPosition + 1][yPosition] == 2) {
+					isStatic = true;
+				}
+			} else {//middleleft
+				if (board[xPosition][yPosition + 1] == 2) {
+					isStatic = true;
+				}
+				if (board[xPosition][yPosition - 1] == 2) {
+					isStatic = true;
+				}
+				if (board[xPosition + 1][yPosition] == 2) {
+					isStatic = true;
+				}
+			}
+		} else if (xPosition == window.getSize().x - 1) {//right
+			if (yPosition == 0) {//topright
+				if (board[xPosition][yPosition + 1] == 2) {
+					isStatic = true;
+				}
+				if (board[xPosition - 1][yPosition] == 2) {
+					isStatic = true;
+				}
+			} else if (yPosition == window.getSize().x - 1) {//bottomlright
+				if (board[xPosition][yPosition - 1] == 2) {
+					isStatic = true;
+				}
+				if (board[xPosition - 1][yPosition] == 2) {
+					isStatic = true;
+				}
+			} else {//middleright
+				if (board[xPosition][yPosition + 1] == 2) {
+					isStatic = true;
+				}
+				if (board[xPosition][yPosition - 1] == 2) {
+					isStatic = true;
+				}
+				if (board[xPosition - 1][yPosition] == 2) {
+					isStatic = true;
+				}
+			}
+		} else {//middle
+			if (yPosition == 0) {//top middle
+				if (board[xPosition][yPosition + 1] == 2) {
+					isStatic = true;
+				}
+				if (board[xPosition + 1][yPosition] == 2) {
+					isStatic = true;
+				}
+				if (board[xPosition - 1][yPosition] == 2) {
+					isStatic = true;
+				}
+			} else if (yPosition == window.getSize().x - 1) {//bottom middle
+				if (board[xPosition][yPosition - 1] == 2) {
+					isStatic = true;
+				}
+				if (board[xPosition + 1][yPosition] == 2) {
+					isStatic = true;
+				}
+				if (board[xPosition - 1][yPosition] == 2) {
+					isStatic = true;
+				}
+			} else {//middle middle
+
+				if (board[xPosition][yPosition + 1] == 2) {
+					isStatic = true;
+				}
+				if (board[xPosition][yPosition - 1] == 2) {
+					isStatic = true;
+				}
+				if (board[xPosition + 1][yPosition] == 2) {
+					isStatic = true;
+				}
+				if (board[xPosition - 1][yPosition] == 2) {
+					isStatic = true;
+				}
+			}
 		}
-		if (board[xPosition][yPosition - 1] == 2) {
-			isStatic = true;
-		}
-		if (board[xPosition + 1][yPosition] == 2) {
-			isStatic = true;
-		}
-		if (board[xPosition - 1][yPosition] == 2) {
-			isStatic = true;
-		}
-		board[xPosition][yPosition] = 2;
 	} else {/*
 		for (int i = 0; i < particles.size(); i++) {
 			if (&particles[i] != this) {
@@ -81,133 +158,6 @@ void Particle::update(sf::RenderWindow& window, std::vector<Particle>& particles
 }
 
 void Particle::walk(sf::RenderWindow& window) {
-	if (xPosition == 0) { //left
-		if (yPosition == 0) {//topleft
-			switch (1 + rand() % 2) {
-			case 1:
-				xPosition += 1;
-				break;
-			case 2:
-				yPosition += 1;
-				break;
-			default:
-				break;
-			}
-		} else if (yPosition == window.getSize().x) {//bottomleft
-			switch (1 + rand() % 2) {
-			case 1:
-				xPosition += 1;
-				break;
-			case 2:
-				xPosition -= 1;
-				break;
-			default:
-				break;
-			}
-		} else {//middleleft
-			switch (1 + rand() % 3) {
-			case 1:
-				xPosition += 1;
-				break;
-			case 2:
-				yPosition -= 1;
-				break;
-			case 3:
-				yPosition += 1;
-				break;
-			default:
-				break;
-			}
-		}
-	} else if (xPosition == window.getSize().x) {//right
-		if (yPosition == 0) {//topright
-			switch (1 + rand() % 2) {
-			case 1:
-				xPosition -= 1;
-				break;
-			case 2:
-				yPosition += 1;
-				break;
-			default:
-				break;
-			}
-		} else if (yPosition == window.getSize().x) {//bottomlright
-			switch (1 + rand() % 2) {
-			case 1:
-				xPosition -= 1;
-				break;
-			case 2:
-				xPosition -= 1;
-				break;
-			default:
-				break;
-			}
-		} else {//middleright
-			switch (1 + rand() % 3) {
-			case 1:
-				xPosition -= 1;
-				break;
-			case 2:
-				yPosition -= 1;
-				break;
-			case 3:
-				yPosition += 1;
-				break;
-			default:
-				break;
-			}
-		}
-	} else {//middle
-		if (yPosition == 0) {//top middle
-			switch (1 + rand() % 3) {
-			case 1:
-				xPosition += 1;
-				break;
-			case 2:
-				xPosition -= 1;
-				break;
-			case 3:
-				yPosition += 1;
-				break;
-			default:
-				break;
-			}
-		} else if (yPosition == window.getSize().x) {//bottom middle
-			switch (1 + rand() % 3) {
-			case 1:
-				xPosition += 1;
-				break;
-			case 2:
-				xPosition -= 1;
-				break;
-			case 3:
-				yPosition -= 1;
-				break;
-			default:
-				break;
-			}
-		} else {//middle middle
-			switch (1 + rand() % 4) {
-			case 1:
-				xPosition += 1;
-				break;
-			case 2:
-				xPosition -= 1;
-				break;
-			case 3:
-				yPosition += 1;
-				break;
-			case 4:
-				yPosition -= 1;
-				break;
-			default:
-				break;
-			}
-		}
-	}
-	
-
-	/*
 	if (!isStatic) {
 		switch (1 + rand() % 4) {
 		case 1:
@@ -232,16 +182,15 @@ void Particle::walk(sf::RenderWindow& window) {
 
 	if (xPosition < 0) {
 		xPosition = 0;
-	} else if (xPosition > window.getSize().x) {
-		xPosition = window.getSize().x;
+	} else if (xPosition > window.getSize().x - 1) {
+		xPosition = window.getSize().x - 1;
 	}
 	
 	if (yPosition < 0) {
 		yPosition = 0;
-	} else if (yPosition > window.getSize().y) {
-		yPosition = window.getSize().y;
+	} else if (yPosition > window.getSize().y - 1) {
+		yPosition = window.getSize().y - 1;
 	}
-	*/
 
 	
 }
@@ -270,6 +219,7 @@ void Particle::setLocation(int x, int y, std::vector<std::vector<int>>& board) {
 	board[xPosition][yPosition] = 0;
 	xPosition = x;
 	yPosition = y;
+	std::cout << x << " " << y << std::endl;
 	board[xPosition][yPosition] = 1;
 }
 
