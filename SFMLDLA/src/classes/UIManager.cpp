@@ -1,7 +1,7 @@
 #include "UIManager.h"
 
 UIManager::UIManager() {
-	window.create(sf::VideoMode(400, 400), "Diffusion-Limited Aggregation", sf::Style::Close);
+	window.create(sf::VideoMode(800, 800), "Diffusion-Limited Aggregation", sf::Style::Close);
 }
 
 void UIManager::pollEvent(std::vector<std::vector<int>>& board) {
