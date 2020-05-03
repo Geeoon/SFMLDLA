@@ -71,11 +71,10 @@ void Particle::update(sf::RenderWindow& window, std::vector<Particle>& particles
 				}
 			}
 		}
-		//window.draw(point);
+		//point.setPosition((float)xPosition, (float)yPosition);
+		//window.draw(point); //uncomment to show particles
 	} else {
-		(*boardP)[xPosition][yPosition] = 2;
 		window.draw(point);
-		point.setPosition((float)xPosition, (float)yPosition);
 	}
 }
 
@@ -121,6 +120,8 @@ void Particle::setIsStatic(bool s) {
 		double timeDif = (arrivalTime - startTime);
 		sf::Color color((std::sin(timeDif / 255) + 1) * (255 / 2), 0, 150);
 		point.setFillColor(color);
+		(*boardP)[xPosition][yPosition] = 2;
+		point.setPosition((float)xPosition, (float)yPosition);
 	} else {
 		point.setFillColor(sf::Color::Black);
 	}
@@ -133,11 +134,11 @@ bool Particle::getIsStatic() {
 void Particle::setSeed(double seed) {
 	srand(seed);
 }
-void Particle::setLocation(int x, int y, std::vector<std::vector<int>>& board) {
-	board[xPosition][yPosition] = 0;
+void Particle::setLocation(int x, int y) {
+	(*boardP)[xPosition][yPosition] = 0;
 	xPosition = x;
 	yPosition = y;
-	board[xPosition][yPosition] = 1;
+	(*boardP)[xPosition][yPosition] = 1;
 }
 
 int Particle::getX() {

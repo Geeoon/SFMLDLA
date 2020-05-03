@@ -13,7 +13,7 @@ public:
 	void setIsStatic(bool s);
 	bool getIsStatic();
 	void setSeed(double seed);
-	void setLocation(int x, int y, std::vector<std::vector<int>>& board);
+	void setLocation(int x, int y);
 	int getX();
 	int getY();
 	sf::RectangleShape getRectangle();
