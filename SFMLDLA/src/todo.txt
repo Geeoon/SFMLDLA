@@ -1,0 +1,1 @@
+*Possibly destroy particles once they're static to improve optimization.

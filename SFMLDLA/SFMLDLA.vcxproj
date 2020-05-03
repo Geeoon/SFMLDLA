@@ -156,6 +156,9 @@
     <ClInclude Include="src\classes\Particle.h" />
     <ClInclude Include="src\classes\UIManager.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\todo.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
