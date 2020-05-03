@@ -3,7 +3,7 @@
 class UIManager
 {
 public:
-	UIManager();
+	UIManager(int x, int y, bool fullscreen);
 	void pollEvent(/*std::vector<std::vector<int>>& board*/);
 	sf::RenderWindow& getWindow();
 	sf::RenderTexture& getTexture();

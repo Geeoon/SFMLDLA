@@ -1,11 +1,17 @@
 #include "UIManager.h"
 
-UIManager::UIManager() {
-	window.create(sf::VideoMode(100, 100), "Diffusion-Limited Aggregation", sf::Style::Close);
+UIManager::UIManager(int x, int y, bool fullscreen) {
+	if (fullscreen == false) {
+		window.create(sf::VideoMode(x, y), "Diffusion-Limited Aggregation", sf::Style::Close);
+	} else {
+		window.create(sf::VideoMode(x, y), "Diffusion-Limited Aggregation", sf::Style::Fullscreen);
+	}
+	texture.create(window.getSize().x, window.getSize().y);
+	texture.clear(sf::Color::Black);
 }
 
 void UIManager::start(int x, int y) {
-	window.setSize(sf::Vector2u(x, y));
+	window.setSize(sf::Vector2u(x+100, y));
 	texture.create(window.getSize().x, window.getSize().y);
 	texture.clear(sf::Color::Black);
 }

@@ -13,7 +13,8 @@ private:
 	int yresolution = 0;
 	int nParticles = 0;
 	bool isDone = false;
-	UIManager ui;
+	bool isFullscreen = false;
+	std::unique_ptr<UIManager> ui;
 	std::unique_ptr<ParticleManager> particles;
 };
 

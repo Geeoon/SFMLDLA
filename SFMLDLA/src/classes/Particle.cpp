@@ -33,7 +33,7 @@ int Particle::update() {
 					setIsStatic();
 					return 1;
 				}
-			} else if (yPosition == windowX - 1) {//bottomleft
+			} else if (yPosition == windowY - 1) {//bottomleft
 				if ((*boardP)[xPosition][yPosition] == 2 || (*boardP)[xPosition][yPosition] == 2) {
 					setIsStatic();
 					return 1;
@@ -50,7 +50,7 @@ int Particle::update() {
 					setIsStatic();
 					return 1;
 				}
-			} else if (yPosition == windowX - 1) {//bottomlright
+			} else if (yPosition == windowY - 1) {//bottomlright
 				if ((*boardP)[xPosition][yPosition] == 2 || (*boardP)[xPosition][yPosition] == 2) {
 					setIsStatic();
 					return 1;
@@ -67,7 +67,7 @@ int Particle::update() {
 					setIsStatic();
 					return 1;
 				}
-			} else if (yPosition == windowX - 1) {//bottom middle
+			} else if (yPosition == windowY - 1) {//bottom middle
 				if ((*boardP)[xPosition][yPosition - 1] == 2 || (*boardP)[xPosition + 1][yPosition] == 2 || (*boardP)[xPosition - 1][yPosition] == 2) {
 					setIsStatic();
 					return 1;
