@@ -1,14 +1,13 @@
 #include "Particle.h"
 
-Particle::Particle(int x, int y, bool seed, int r, std::vector<std::vector<int>> *board, sf::RenderTexture *window) {
+Particle::Particle(int x, int y, bool seed, int r, std::vector<std::vector<int>> *board, sf::RenderTexture *window, size_t *pStatic) {
+	nStatic = pStatic;
 	windowP = window;
 	windowX = (*windowP).getSize().x;
 	windowY = (*windowP).getSize().y;
 	boardP = board;
 	xPosition = 0;
 	yPosition = 0;
-	arrivalTime = 0;
-	startTime = time(nullptr);
 	radius = r;
 	srand(time(NULL));
 	isStatic = seed;
@@ -31,52 +30,52 @@ int Particle::update() {
 		if (xPosition == 0) { //left
 			if (yPosition == 0) {//topleft
 				if ((*boardP)[xPosition][yPosition] == 2 || (*boardP)[xPosition][yPosition] == 2) {
-					setIsStatic(true);
+					setIsStatic();
 					return 1;
 				}
 			} else if (yPosition == windowX - 1) {//bottomleft
 				if ((*boardP)[xPosition][yPosition] == 2 || (*boardP)[xPosition][yPosition] == 2) {
-					setIsStatic(true);
+					setIsStatic();
 					return 1;
 				}
 			} else {//middleleft
 				if ((*boardP)[xPosition][yPosition] == 2 || (*boardP)[xPosition][yPosition] == 2 || (*boardP)[xPosition][yPosition] == 2) {
-					setIsStatic(true);
+					setIsStatic();
 					return 1;
 				}
 			}
 		} else if (xPosition == windowX - 1) {//right
 			if (yPosition == 0) {//topright
 				if ((*boardP)[xPosition][yPosition] == 2 || (*boardP)[xPosition][yPosition] == 2) {
-					setIsStatic(true);
+					setIsStatic();
 					return 1;
 				}
 			} else if (yPosition == windowX - 1) {//bottomlright
 				if ((*boardP)[xPosition][yPosition] == 2 || (*boardP)[xPosition][yPosition] == 2) {
-					setIsStatic(true);
+					setIsStatic();
 					return 1;
 				}
 			} else {//middleright
 				if ((*boardP)[xPosition][yPosition + 1] == 2 || (*boardP)[xPosition][yPosition - 1] == 2 || (*boardP)[xPosition - 1][yPosition] == 2) {
-					setIsStatic(true);
+					setIsStatic();
 					return 1;
 				}
 			}
 		} else {//middle
 			if (yPosition == 0) {//top middle
 				if ((*boardP)[xPosition][yPosition + 1] == 2 || (*boardP)[xPosition + 1][yPosition] == 2 || (*boardP)[xPosition - 1][yPosition] == 2) {
-					setIsStatic(true);
+					setIsStatic();
 					return 1;
 				}
 			} else if (yPosition == windowX - 1) {//bottom middle
 				if ((*boardP)[xPosition][yPosition - 1] == 2 || (*boardP)[xPosition + 1][yPosition] == 2 || (*boardP)[xPosition - 1][yPosition] == 2) {
-					setIsStatic(true);
+					setIsStatic();
 					return 1;
 				}
 			} else {//middle middle
 
 				if ((*boardP)[xPosition][yPosition + 1] == 2 || (*boardP)[xPosition][yPosition - 1] == 2 || (*boardP)[xPosition + 1][yPosition] == 2 || (*boardP)[xPosition - 1][yPosition] == 2) {
-					setIsStatic(true);
+					setIsStatic();
 					return 1;
 				}
 			}
@@ -118,19 +117,13 @@ void Particle::walk() {
 	}
 }
 
-void Particle::setIsStatic(bool s) {
-	isStatic = s;
-	if (isStatic == true) {
-		arrivalTime = time(nullptr);
-		double timeDif = (arrivalTime - startTime);
-		sf::Color color((std::sin(timeDif / 10) + 1) * (255 / 2), 0, 150);
-		point.setFillColor(color);
-		(*boardP)[xPosition][yPosition] = 2;
-		point.setPosition((float)xPosition, (float)yPosition);
-		(*windowP).draw(point);
-	} else {
-		point.setFillColor(sf::Color::Black);
-	}
+void Particle::setIsStatic() {
+	isStatic = true;
+	sf::Color color((std::sin(sqrt((float)(*nStatic)) / (float)100) + 1) * (255 / 2), 0, 150);
+	point.setFillColor(color);
+	(*boardP)[xPosition][yPosition] = 2;
+	point.setPosition((float)xPosition, (float)yPosition);
+	(*windowP).draw(point);
 }
 
 bool Particle::getIsStatic() {
@@ -145,14 +138,6 @@ void Particle::setLocation(int x, int y) {
 	xPosition = x;
 	yPosition = y;
 	(*boardP)[xPosition][yPosition] = 1;
-}
-
-int Particle::getX() {
-	return xPosition;
-}
-
-int Particle::getY() {
-	return yPosition;
 }
 
 sf::RectangleShape Particle::getRectangle() {

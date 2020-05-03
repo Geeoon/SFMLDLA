@@ -8,20 +8,19 @@
 class Particle
 {
 public:
-	Particle(int x, int y, bool seed, int r, std::vector<std::vector<int>> *board, sf::RenderTexture *window);
+	Particle(int x, int y, bool seed, int r, std::vector<std::vector<int>> *board, sf::RenderTexture *window, size_t *pStatic);
 	int update();
-	void setIsStatic(bool s);
+	void setIsStatic();
 	bool getIsStatic();
 	void setSeed(double seed);
 	void setLocation(int x, int y);
-	int getX();
-	int getY();
 	sf::RectangleShape getRectangle();
 private:
 	void walk();
 	sf::RenderTexture *windowP;
 	sf::RectangleShape point;
 	std::vector<std::vector<int>> *boardP;
+	size_t *nStatic;
 	int xPosition;
 	int yPosition;
 	double arrivalTime;
