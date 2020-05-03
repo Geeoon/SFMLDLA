@@ -1,6 +1,6 @@
 #include "Particle.h"
 
-Particle::Particle(int x, int y, bool seed, int r, std::vector<std::vector<int>> *board, sf::RenderWindow *window) {
+Particle::Particle(int x, int y, bool seed, int r, std::vector<std::vector<int>> *board, sf::RenderTexture *window) {
 	windowP = window;
 	windowX = (*windowP).getSize().x;
 	windowY = (*windowP).getSize().y;
@@ -24,7 +24,7 @@ Particle::Particle(int x, int y, bool seed, int r, std::vector<std::vector<int>>
 	point.setPosition((float)x, (float)y);
 }
 
-void Particle::update() {
+int Particle::update() {
 	if (!isStatic) {
 		walk();
 		(*boardP)[xPosition][yPosition] = 1;
@@ -32,51 +32,59 @@ void Particle::update() {
 			if (yPosition == 0) {//topleft
 				if ((*boardP)[xPosition][yPosition] == 2 || (*boardP)[xPosition][yPosition] == 2) {
 					setIsStatic(true);
+					return 1;
 				}
 			} else if (yPosition == windowX - 1) {//bottomleft
 				if ((*boardP)[xPosition][yPosition] == 2 || (*boardP)[xPosition][yPosition] == 2) {
 					setIsStatic(true);
+					return 1;
 				}
 			} else {//middleleft
 				if ((*boardP)[xPosition][yPosition] == 2 || (*boardP)[xPosition][yPosition] == 2 || (*boardP)[xPosition][yPosition] == 2) {
 					setIsStatic(true);
+					return 1;
 				}
 			}
 		} else if (xPosition == windowX - 1) {//right
 			if (yPosition == 0) {//topright
 				if ((*boardP)[xPosition][yPosition] == 2 || (*boardP)[xPosition][yPosition] == 2) {
 					setIsStatic(true);
+					return 1;
 				}
 			} else if (yPosition == windowX - 1) {//bottomlright
 				if ((*boardP)[xPosition][yPosition] == 2 || (*boardP)[xPosition][yPosition] == 2) {
 					setIsStatic(true);
+					return 1;
 				}
 			} else {//middleright
 				if ((*boardP)[xPosition][yPosition + 1] == 2 || (*boardP)[xPosition][yPosition - 1] == 2 || (*boardP)[xPosition - 1][yPosition] == 2) {
 					setIsStatic(true);
+					return 1;
 				}
 			}
 		} else {//middle
 			if (yPosition == 0) {//top middle
 				if ((*boardP)[xPosition][yPosition + 1] == 2 || (*boardP)[xPosition + 1][yPosition] == 2 || (*boardP)[xPosition - 1][yPosition] == 2) {
 					setIsStatic(true);
+					return 1;
 				}
 			} else if (yPosition == windowX - 1) {//bottom middle
 				if ((*boardP)[xPosition][yPosition - 1] == 2 || (*boardP)[xPosition + 1][yPosition] == 2 || (*boardP)[xPosition - 1][yPosition] == 2) {
 					setIsStatic(true);
+					return 1;
 				}
 			} else {//middle middle
 
 				if ((*boardP)[xPosition][yPosition + 1] == 2 || (*boardP)[xPosition][yPosition - 1] == 2 || (*boardP)[xPosition + 1][yPosition] == 2 || (*boardP)[xPosition - 1][yPosition] == 2) {
 					setIsStatic(true);
+					return 1;
 				}
 			}
 		}
 		//point.setPosition((float)xPosition, (float)yPosition);
 		//(*windowP).draw(point); //uncomment these two lines to show particles
-	} else {
-		(*windowP).draw(point);
 	}
+	return 0;
 }
 
 void Particle::walk() {
@@ -119,6 +127,7 @@ void Particle::setIsStatic(bool s) {
 		point.setFillColor(color);
 		(*boardP)[xPosition][yPosition] = 2;
 		point.setPosition((float)xPosition, (float)yPosition);
+		(*windowP).draw(point);
 	} else {
 		point.setFillColor(sf::Color::Black);
 	}

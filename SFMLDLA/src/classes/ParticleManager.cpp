@@ -1,6 +1,6 @@
 #include "ParticleManager.h"
 
-ParticleManager::ParticleManager(int size, sf::RenderWindow& window) {
+ParticleManager::ParticleManager(int size, sf::RenderTexture& window) {
 	board.resize(window.getSize().x, std::vector<int>(window.getSize().y));
 	srand((unsigned int)time(NULL));
 	particles.resize(size, Particle(0, 0, false, radius, &board, &window));
@@ -12,7 +12,10 @@ ParticleManager::ParticleManager(int size, sf::RenderWindow& window) {
 
 void ParticleManager::update() {
 	for (size_t i = 0; i < particles.size(); i++) {
-		particles[i].update();
+		staticParticles += particles[i].update();
+	}
+	if (staticParticles >= particles.size() - 1) {
+		std::cout << "All particles are static.";
 	}
 }
 
