@@ -1,6 +1,9 @@
 #include "Particle.h"
 
-Particle::Particle(int x, int y, bool seed, int r, std::vector<std::vector<int>> *board) {
+Particle::Particle(int x, int y, bool seed, int r, std::vector<std::vector<int>> *board, sf::RenderWindow *window) {
+	windowP = window;
+	windowX = (*windowP).getSize().x;
+	windowY = (*windowP).getSize().y;
 	boardP = board;
 	xPosition = 0;
 	yPosition = 0;
@@ -21,9 +24,7 @@ Particle::Particle(int x, int y, bool seed, int r, std::vector<std::vector<int>>
 	point.setPosition((float)x, (float)y);
 }
 
-void Particle::update(sf::RenderWindow& window, std::vector<Particle>& particles) {
-	windowX =  window.getSize().x;
-	windowY = window.getSize().y;
+void Particle::update() {
 	if (!isStatic) {
 		walk();
 		(*boardP)[xPosition][yPosition] = 1;
@@ -72,9 +73,9 @@ void Particle::update(sf::RenderWindow& window, std::vector<Particle>& particles
 			}
 		}
 		//point.setPosition((float)xPosition, (float)yPosition);
-		//window.draw(point); //uncomment to show particles
+		//(*windowP).draw(point); //uncomment these two lines to show particles
 	} else {
-		window.draw(point);
+		(*windowP).draw(point);
 	}
 }
 
@@ -107,10 +108,6 @@ void Particle::walk() {
 	} else if (yPosition > windowY - 1) {
 		yPosition = windowY - 1;
 	}
-}
-
-void Particle::draw(sf::RenderWindow& window) {
-	window.draw(point);
 }
 
 void Particle::setIsStatic(bool s) {

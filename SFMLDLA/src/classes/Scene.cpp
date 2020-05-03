@@ -9,7 +9,7 @@ void Scene::start() {
 		ui.pollEvent(particles->getBoard());
 		ui.getWindow().clear();
 
-		particles->update(ui.getWindow());
+		particles->update();
 
 		ui.getWindow().display();
 	}
