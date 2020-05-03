@@ -10,15 +10,20 @@ ParticleManager::ParticleManager(int size, sf::RenderTexture& window) {
 	particles.push_back(Particle(window.getSize().x / 2, window.getSize().y / 2, true, radius, &board, &window)); //this is the seed
 }
 
+ParticleManager::~ParticleManager() {
+
+}
+
 void ParticleManager::update() {
 	for (size_t i = 0; i < particles.size(); i++) {
 		staticParticles += particles[i].update();
-	}
-	if (staticParticles >= particles.size() - 1) {
-		std::cout << "All particles are static.";
 	}
 }
 
 std::vector<std::vector<int>>& ParticleManager::getBoard(){
 	return board;
+}
+
+bool ParticleManager::isDone() {
+	return (staticParticles >= (particles.size() - 1));
 }

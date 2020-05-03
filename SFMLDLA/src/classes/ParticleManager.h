@@ -7,12 +7,14 @@ class ParticleManager
 {
 public:
 	ParticleManager(int size, sf::RenderTexture& window);
+	~ParticleManager();
 	void update();
 	std::vector<std::vector<int>>& getBoard();
+	bool isDone();
 private:
 	std::vector<Particle> particles;
 	std::vector<std::vector<int>> board;
-	int staticParticles = 1;
+	size_t staticParticles = 1;
 	int radius = 1;
 };
 

@@ -123,7 +123,7 @@ void Particle::setIsStatic(bool s) {
 	if (isStatic == true) {
 		arrivalTime = time(nullptr);
 		double timeDif = (arrivalTime - startTime);
-		sf::Color color((std::sin(timeDif / 100) + 1) * (255 / 2), 0, 150);
+		sf::Color color((std::sin(timeDif / 200) + 1) * (255 / 2), 0, 150);
 		point.setFillColor(color);
 		(*boardP)[xPosition][yPosition] = 2;
 		point.setPosition((float)xPosition, (float)yPosition);

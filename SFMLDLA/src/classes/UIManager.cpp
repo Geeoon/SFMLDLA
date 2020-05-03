@@ -1,8 +1,13 @@
 #include "UIManager.h"
 
 UIManager::UIManager() {
-	window.create(sf::VideoMode(800, 800), "Diffusion-Limited Aggregation", sf::Style::Close);
+	window.create(sf::VideoMode(100, 100), "Diffusion-Limited Aggregation", sf::Style::Close);
+}
+
+void UIManager::start(int x, int y) {
+	window.setSize(sf::Vector2u(x, y));
 	texture.create(window.getSize().x, window.getSize().y);
+	texture.clear(sf::Color::Black);
 }
 
 void UIManager::pollEvent(/*std::vector<std::vector<int>>& board*/) {
@@ -26,4 +31,8 @@ sf::RenderWindow& UIManager::getWindow() {
 
 sf::RenderTexture& UIManager::getTexture() {
 	return texture;
+}
+
+void UIManager::saveDLA() {
+	texture.getTexture().copyToImage().saveToFile("DLA.png");
 }
