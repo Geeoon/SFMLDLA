@@ -1,7 +1,7 @@
 #include "classes/Scene.h"
 
 int main() {
-	Scene test;
-	test.start();
+	Scene scene;
+	scene.start();
 	return 0;
 }
