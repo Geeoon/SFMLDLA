@@ -8,6 +8,10 @@ ParticleManager::ParticleManager(int size, sf::RenderTexture& window) {
 		particles[i].setLocation(rand() % (int)(window.getSize().x), rand() % (int)(window.getSize().y));
 	}
 	particles.push_back(Particle(window.getSize().x / 2, window.getSize().y / 2, true, radius, &board, &window, &staticParticles)); //this is the seed
+	particles.push_back(Particle(window.getSize().x / 2 + 1, window.getSize().y / 2, true, radius, &board, &window, &staticParticles)); //this is the seed
+	particles.push_back(Particle(window.getSize().x / 2 - 1, window.getSize().y / 2, true, radius, &board, &window, &staticParticles)); //this is the seed
+	particles.push_back(Particle(window.getSize().x / 2, window.getSize().y / 2 + 1, true, radius, &board, &window, &staticParticles)); //this is the seed
+	particles.push_back(Particle(window.getSize().x / 2, window.getSize().y / 2 - 1, true, radius, &board, &window, &staticParticles)); //this is the seed
 }
 
 ParticleManager::~ParticleManager() {

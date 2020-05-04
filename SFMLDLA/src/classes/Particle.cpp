@@ -1,6 +1,8 @@
 #include "Particle.h"
 
 Particle::Particle(int x, int y, bool seed, int r, std::vector<std::vector<int>> *board, sf::RenderTexture *window, size_t *pStatic) {
+	arrivalTime = 0;
+	startTime = 0;
 	nStatic = pStatic;
 	windowP = window;
 	windowX = (*windowP).getSize().x;

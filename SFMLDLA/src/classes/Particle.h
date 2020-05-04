@@ -23,8 +23,8 @@ private:
 	size_t *nStatic;
 	int xPosition;
 	int yPosition;
-	double arrivalTime;
-	double startTime;
+	double arrivalTime = 0;
+	double startTime = 0;
 	bool isStatic = false;
 	int radius;
 	int windowX = 0;
