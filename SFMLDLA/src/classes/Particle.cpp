@@ -13,16 +13,14 @@ Particle::Particle(int x, int y, bool seed, int r, std::vector<std::vector<int>>
 	radius = r;
 	srand(time(NULL));
 	isStatic = seed;
+	point.setSize(sf::Vector2f(radius, radius));
 	if (seed == true) {
 		xPosition = x;
 		yPosition = y;
-		(*boardP)[xPosition][yPosition] = 2;
-		point.setFillColor(sf::Color(0, 0, 150));
+		setIsStatic();
 	} else {
 		point.setFillColor(sf::Color::White);
 	}
-	point.setSize(sf::Vector2f(radius, radius));
-	point.setPosition((float)x, (float)y);
 }
 
 int Particle::update() {

@@ -14,7 +14,7 @@ public:
 private:
 	std::vector<Particle> particles;
 	std::vector<std::vector<int>> board;
-	size_t staticParticles = 1;
+	size_t staticParticles = 0;
 	int radius = 1;
 };
 
