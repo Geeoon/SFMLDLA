@@ -80,8 +80,6 @@ int Particle::update() {
 				}
 			}
 		}
-		//point.setPosition((float)xPosition, (float)yPosition);
-		//(*windowP).draw(point); //uncomment these two lines to show particles
 	}
 	return 0;
 }
